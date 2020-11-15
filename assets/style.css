@@ -1,0 +1,65 @@
+body {
+    background-image: url("background.jpg");
+    background-size: auto;
+    background-color: #7a99c4;
+    font-family: 'News Cycle', sans-serif;
+}
+
+.nav-blue {
+    background-color: #0c3a79;
+    padding: .50rem;
+}
+
+.cont-bg-blue {
+    background-color: rgba(122, 153, 196, 0.75);
+    color: #0c3a79;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+h1 {
+    padding-top: 15px;
+}
+
+a {
+    color: #fff;
+}
+
+.img-thumb-taller {
+    margin-right: .5rem;
+    background-color: #0c3a79;
+    float: left;
+}
+
+.img-button {
+    background-color: #0c3a79;
+}
+
+.btn-blue {
+    background-color: #0c3a79;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.port-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 20px;
+}
+
+.footer-blue {
+    width: 100%;
+    text-align: center;
+    padding-bottom: .25rem;
+    background-color: #7a99c4;
+    color: #5d87c4;
+}
+
+.hr-bottom {
+    height: 5px;
+    background-color: #0c3a79;
+    vertical-align: top;
+    margin-top: 0rem;
+}
