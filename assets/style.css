@@ -1,13 +1,12 @@
 body {
     background-image: url('images/background.jpg');
     background-size: auto;
-    color: #4c4c4f;
+    color: #272727;
     font-family: 'News Cycle', sans-serif;
 }
 
 header {
     background-color: rgba(122, 153, 196, 0.5);
-    color: #0c3a79;
     text-align: center;
     padding: .5rem;
     margin-top: 1rem;
@@ -25,12 +24,13 @@ h3 {
 h4{
     padding-top: .5rem;
     font-weight: bold;
+    font-size: xx-large;
 }
 
 h5 {
-    color: #272727;
     padding-top: .5rem;
     font-weight: bold;
+    font-size: x-large;
 }
 
 .weather-img {
@@ -39,8 +39,8 @@ h5 {
 
 .div-search {
     background-color: rgba(12, 58, 121, 0.5);
-    color: #abb6c5;
     min-height: 12rem;
+    padding-bottom: .5rem;
 }
 
 .text-box {
@@ -70,13 +70,16 @@ h5 {
 .div-today {
     background-color: rgba(122, 153, 196, 0.5);
     min-height: 12rem;
+    padding-bottom: .5rem;
     text-align: center;
+    font-size: larger;
+    font-weight: bolder;
 }
 
 .div-forcast {
     background-color: rgba(250, 233, 32, 0.5);
-    color: #f7f2c1;
     min-height: 12rem;
+    padding-bottom: .5rem;
 }
 
 .hide {
