@@ -70,22 +70,35 @@ h5 {
 .div-today {
     background-color: rgba(122, 153, 196, 0.5);
     min-height: 12rem;
-    padding-bottom: .5rem;
+    padding-bottom: 2rem;
     text-align: center;
     font-size: larger;
     font-weight: bolder;
 }
 
-.div-forcast {
+.div-forecast {
     background-color: rgba(250, 233, 32, 0.5);
     min-height: 12rem;
-    padding-bottom: .5rem;
+    padding: .5rem;
 }
 
-.hide {
-    display: none;
+.forecast-card {
+    background-color: rgba(247, 242, 193, 0.5);
+    width: 20rem;
+    text-align: center;
 }
 
-.show {
-    display: block;
+.forecast-img {
+    min-height: 5rem;
+}
+
+.footer-blue {
+    background-color: rgba(12, 58, 121, 0.5);
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    min-height: 1rem;
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
 }
