@@ -25,12 +25,12 @@ h3 {
 h4{
     padding-top: .5rem;
     font-weight: bold;
-
 }
 
 h5 {
+    color: #272727;
     padding-top: .5rem;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 .weather-img {
@@ -48,11 +48,18 @@ h5 {
     height: 3rem;
     font-weight: bolder;
 }
+
 .btn-blue {
     background-color: #7a99c4;
     color: #0c3a79;
     margin-left: .5rem;
     height: 3rem;
+}
+
+.list-item {
+    background-color: rgba(122, 153, 196, 0.25);
+    color: #0c3a79;
+    font-weight: bolder;
 }
 
 .search-card {
