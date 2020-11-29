@@ -12,23 +12,32 @@ SO THAT I can plan a trip accordingly
 
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
-[] I am presented with current and future conditions for that city and that city is added to the search history
+[x] I am presented with current and future conditions for that city and that city is added to the search history
 WHEN I view current weather conditions for that city
-[] I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+[x] I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
 WHEN I view the UV index
-[] I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+[x] I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
 WHEN I view future weather conditions for that city
-[] I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
+[x] I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
 WHEN I click on a city in the search history
-[] I am again presented with current and future conditions for that city
+[x] I am again presented with current and future conditions for that city
 WHEN I open the weather dashboard
-[] I am presented with the last searched city forecast
+[x] I am presented with the last searched city forecast
 
 ## Approach
 
-To complete the project, 
+This project was completed using a combination of prebuilt technology (Bootstrap, JavaScript, JQuery) and custom built solutions to achieve a web page that will allow a user to input the name of a city and get weather and forecasted conditions for that location.
 
-<p><img src="assets/image.jpg" alt="" title=""></p>
+![](https://media.giphy.com/media/O2AvBh6vHxwyxWGXPk/giphy.gif)
+
+
+## Improvements
+
+The page was built to provide UV Index information and store a search history. Improvements include converting search history to buttons that will display the data for the historical city and adding the ability to search by city & state to better ensure the information provided is for the desired city (i.e. Wilmington, DE vs Wilmington, NC). Additionally, once fixed and available, adding UV Index information to the 5-Day forecast section as well.
+
+## Technology
+
+This app utilizes [Bootstrap](https://getbootstrap.com/) for CSS framework, [Google Fonts](https://fonts.google.com/), [JavaScript](https://www.javascript.com/), [JQuery](https://jquery.com/), and the [OpenWeather](https://openweathermap.org/) API.
 
 ## Link
 

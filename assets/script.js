@@ -15,7 +15,7 @@ $('#searchValue').keypress(function(event) {
 // On Click Event Listener on Search Button after City Name is Entered
 // Executes API Query for City and Returns Desired Values
 $('#searchBtn').on('click', function() {
-    $('#forecastH5').addClass('show');
+    $('#forecastH5');
     // Search Value from City Search Input
     city = $('#searchValue').val();
     // Clear City Input Box After Search is Initiated
@@ -26,6 +26,7 @@ $('#searchBtn').on('click', function() {
         url: 'https://api.openweathermap.org/data/2.5/weather?q=' + city + apiKey,
         method: 'GET'
     }).then(function(response){
+        console.log(response)
         // Save Current City Search to a List in the Search Section on the HTML
         makeList();
 
@@ -49,6 +50,29 @@ function getCurrentConditions(response) {
     let tempF = (response.main.temp - 273.15) * 1.80 + 32;
     // Rounds Temperature to the Nearest Degree
     tempF = Math.round(tempF);
+
+    // Get Latitude and Longitude for Searched City
+    let cityLon = response.coord.lon;
+    let cityLat = response.coord.lat;
+
+    $.ajax({
+        url: `http://api.openweathermap.org/data/2.5/uvi?lat=${cityLat}&lon=${cityLon}&units=imperial&exclude=minutely,hourly${apiKey}`,
+        method: 'GET',
+    }).then(function (response) {
+        console.log(response);
+    })
+
+    let uvi = (Math.round(response.value))
+    console.log(uvi);
+
+    //Change the background color of the UV Index to favorable(green), moderate(orange), and severe(red)
+    // if (uvi <= 3) {
+    //     $(".uvi").html('UV Index: <span class="UV-favorable">' + uvi + '</span>');
+    // } else if (uvi <= 7) {
+    //     $(".uvi").html('UV Index: <span class="UV-moderate">' + uvi + '</span>');
+    // } else {
+    //     $(".uvi").html('UV Index: <span class="UV-severe">' + uvi + '</span>');
+    // }
     
     // Removes Existing Content & Child Nodes from the 'Today' Div
     $('#today').empty();
@@ -58,9 +82,10 @@ function getCurrentConditions(response) {
         $('<img>').addClass('weather-img').attr('src', 'https://openweathermap.org/img/w/' + response.weather[0].icon + '.png'),
         $('<h4>').addClass('card-title').text(response.name),
         $('<h5>').addClass('card-title').text(date.toLocaleDateString('en-US')),
-        $('<p>').addClass('card-text current-temp').text('Temperature: ' + tempF + ' °F'),
-        $('<p>').addClass('card-text current-humidity').text('Humidity: ' + response.main.humidity + '%'),
-        $('<p>').addClass('card-text current-wind').text('Wind Speed: ' + response.wind.speed + ' MPH')
+        $('<p>').addClass('card-text').text('Temperature: ' + tempF + ' °F'),
+        $('<p>').addClass('card-text').text('Humidity: ' + response.main.humidity + '%'),
+        $('<p>').addClass('card-text').text('Wind Speed: ' + response.wind.speed + ' MPH'),
+        // $('<p>').addClass('card-text').text('UV Index: ' + uvi + ' of 10') <---Needs to be fixed to display value
         )
   }
 
