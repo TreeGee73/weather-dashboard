@@ -50,20 +50,39 @@ function getCurrentConditions(response) {
     let tempF = (response.main.temp - 273.15) * 1.80 + 32;
     // Rounds Temperature to the Nearest Degree
     tempF = Math.round(tempF);
+    
+    // Removes Existing Content & Child Nodes from the 'Today' Div
+    $('#today').empty();
+    
+    // Get, Format, and Add Current Forcast Data to 'Today' Div
+        $('#today').append(
+            $('<img>').addClass('weather-img').attr('src', 'https://openweathermap.org/img/w/' + response.weather[0].icon + '.png'),
+            $('<h4>').addClass('card-title').text(response.name),
+            $('<h5>').addClass('card-title').text(date.toLocaleDateString('en-US')),
+            $('<p>').addClass('card-text').text('Temperature: ' + tempF + ' °F'),
+            $('<p>').addClass('card-text').text('Humidity: ' + response.main.humidity + '%'),
+            $('<p>').addClass('card-text').text('Wind Speed: ' + response.wind.speed + ' MPH')
+            )
 
     // Get Latitude and Longitude for Searched City
     let cityLon = response.coord.lon;
     let cityLat = response.coord.lat;
+    console.log(cityLon, cityLat);
 
     $.ajax({
         url: `http://api.openweathermap.org/data/2.5/uvi?lat=${cityLat}&lon=${cityLon}&units=imperial&exclude=minutely,hourly${apiKey}`,
         method: 'GET',
-    }).then(function (response) {
-        console.log(response);
+    }).then(function (uvi) {
+        console.log(uvi);
+    
+    // Get, Format, and Add Current Forcast Data to 'Today' Div
+    $('#today').append(
+       $('<p>').addClass('card-text').text('UV Index: ' + uvi.value + ' of 10')
+        )
     })
 
-    let uvi = (Math.round(response.value))
-    console.log(uvi);
+    // let uvi = (Math.round(response.value))
+    // console.log(uvi);
 
     //Change the background color of the UV Index to favorable(green), moderate(orange), and severe(red)
     // if (uvi <= 3) {
@@ -73,61 +92,36 @@ function getCurrentConditions(response) {
     // } else {
     //     $(".uvi").html('UV Index: <span class="UV-severe">' + uvi + '</span>');
     // }
-    
-    // Removes Existing Content & Child Nodes from the 'Today' Div
-    $('#today').empty();
-    
-    // Get, Format, and Add Current Forcast Data to 'Today' Div
-    $('#today').append(
-        $('<img>').addClass('weather-img').attr('src', 'https://openweathermap.org/img/w/' + response.weather[0].icon + '.png'),
-        $('<h4>').addClass('card-title').text(response.name),
-        $('<h5>').addClass('card-title').text(date.toLocaleDateString('en-US')),
-        $('<p>').addClass('card-text').text('Temperature: ' + tempF + ' °F'),
-        $('<p>').addClass('card-text').text('Humidity: ' + response.main.humidity + '%'),
-        $('<p>').addClass('card-text').text('Wind Speed: ' + response.wind.speed + ' MPH'),
-        // $('<p>').addClass('card-text').text('UV Index: ' + uvi + ' of 10') <---Needs to be fixed to display value
-        )
   }
 
 // Function to Create and Display the 5-Day Forecast
 function getCurrentForecast() {
     // Execute API Search & Return Data
     $.ajax({
-        url: 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + apiKey,
+        url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial${apiKey}`,
         method: 'GET'
     }).then(function (response){
+        
         // Removes Existing Content & Child Nodes from the '5-Day Forecast' Div
         $('#forecast').empty();
-        // Set Variable to Collect Response Data
-        let results = response.list;
+
+
+        
         // Create For Loop to Capture Forecast Data for 'Today'+1 through 'Today'+5
-      //declare start date to check against
-      // startDate = 20
-      //have end date, endDate = startDate + 5
-      for (let i = 0; i < results.length; i++) {
-        // Set Date/Time Variable  
-        let day = Number(results[i].dt_txt.split('-')[2].split(' ')[0]);
-        let hour = results[i].dt_txt.split('-')[2].split(' ')[1];
-
-        // Get Data Based on Dates for Forecast
-        if(results[i].dt_txt.indexOf('00:00:00') !== -1){
-            // Get and Convert Temperature to Degrees Farenheit
-            let tempF = (results[i].main.temp - 273.15) * 1.80 + 32;
-            // Rounds Temperature to the Nearest Degree
-           tempF = Math.round(tempF);
-
-            // Get, Format, and Add Current Forcast Data to '5-Day Forecast' Div
-            $('#forecast').append(
-                $('<div>').addClass('card mr-2  ml-3 forecast-card').append(
-                    $('<div>').addClass('card-body').append(
-                        $('<h5>').addClass('card-title').text(date.toLocaleDateString('en-US')),
-                        $('<img>').addClass('forecast-img').attr('src', 'https://openweathermap.org/img/w/' + results[i].weather[0].icon + '.png'),
-                        $('<p>').addClass('card-text').text('Temperature: ' + tempF + ' °F'),
-                        $('<p>').addClass('card-text').text('Humidity: ' + results[i].main.humidity + '%')
-                    )
+      for (let i = 5; i < 40; i += 8) {
+        let results = response.list
+                    
+        // Get, Format, and Add Current Forcast Data to '5-Day Forecast' Div
+        $('#forecast').append(
+            $('<div>').addClass('card mr-2  ml-3 forecast-card').append(
+                $('<div>').addClass('card-body').append(
+                    $('<h5>').addClass('card-title').text(new Date(results[i].dt_txt).toLocaleDateString('en-US')),
+                    $('<img>').addClass('forecast-img').attr('src', 'https://openweathermap.org/img/w/' + results[i].weather[0].icon + '.png'),
+                    $('<p>').addClass('card-text').text('Temperature: ' + Math.round(results[i].main.temp) + ' °F'),
+                    $('<p>').addClass('card-text').text('Humidity: ' + results[i].main.humidity + '%')
                 )
             )
+        )
         }
-    }
-});
+    });
 }
